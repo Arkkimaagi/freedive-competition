@@ -7,8 +7,8 @@
 		<script type="text/javascript" src="lib/jquery.timepicker.min.js"></script>
 		<script type="text/javascript" src="lib/jquery.flip.min.js"></script>
 		<script type="text/javascript" src="lib/lib.js"></script>
-		<link rel="stylesheet" type="text/css" href="timer.css" />  
-		<link rel="stylesheet" type="text/css" href="lib/jquery.timepicker.css" />  
+		<link rel="stylesheet" type="text/css" href="timer.css" />
+		<link rel="stylesheet" type="text/css" href="lib/jquery.timepicker.css" />
 
 		<script>
 		$(document).ready(function() {
@@ -34,8 +34,8 @@
 				$("#countup").slideUp();
 				$("#countdown").slideDown();
 			};
-			
-			var states = 
+
+			var states =
 			[
 				{trigger: 121, audio: "2min",      func: nullFunc},
 				{trigger: 91,  audio: "1min30sec", func: nullFunc},
@@ -67,7 +67,7 @@
 				starttime.setSeconds(0);
 				isAllowedStarttime( (starttime - new Date().getTime()) >= 120000 );
 			});
-			
+
 			$("#start").on( "click", function() {
 				if ( isAllowedStarttime( (starttime - new Date().getTime()) >= 120000 ) )
 				{
@@ -81,47 +81,47 @@
 					$("#card").flip(true);
 				}
 			});
-			
+
 			$("#countdown").on( "click", function() {
 				run = false;
 				$("#card").flip(false);
 			});
-			
+
 			$("#countup").on( "click", function() {
 				run = false;
 				$("#card").flip(false);
 			});
-			
-			function timer() 
+
+			function timer()
 			{
 				function getTime(secs) {
 					if ( secs < 0 )
 						secs = -secs;
-					
+
 					sec   = secs % 60;
 					min   = Math.floor((secs % 3600) / 60);
 					hour  = Math.floor((secs % 86400) / 3600);
-					
+
 					if ( secs >= 3600 )
 						return hour + ":" + ('0'+min).slice(-2) + "'" + ('0'+sec).slice(-2);
-						
+
 					return min + "'" + ('0'+sec).slice(-2);
 				}
-				
+
 				function runFunc() {
 					newCountdown = Math.ceil((starttime-new Date().getTime())/1000); // in secs
-					
+
 					if ( newCountdown != countdown )
 					{
 						countdown = newCountdown;
 						get('countdown').innerHTML = getTime(countdown);
 						get('countup').innerHTML   = getTime(countdown);
-						
+
 						if ( countdown <= states[state]['trigger'] )
 						{
 							if ( states[state]['audio'] != null )
 								get(states[state]['audio']).play();
-							
+
 							states[state]['func']();
 							state++;
 						}
@@ -143,7 +143,7 @@
 	<body>
 		<div id="card">
 			<div class="front">
-				<div class="form-style-2">	
+				<div class="form-style-2">
 					<label for="starttime">
 						<span>Starttime</span>
 						<input id="starttime" type="text" class="input-field"/>
@@ -164,7 +164,7 @@
 						</select>
 					</label>
 					<div id="start" class="btn">Start</div>
-				</div>				
+				</div>
 			</div>
 			<div class="back">
 				<div id="countup" class="countup">00'00</div>
@@ -172,7 +172,7 @@
 				<div id="time" class="time">00'00</div>
 			</div>
 		</div>
-		
+
 		<audio id="2min"      src="audio/2min.wav"      preload="auto"></audio>
 		<audio id="1min30sec" src="audio/1min30sec.wav" preload="auto"></audio>
 		<audio id="1min"      src="audio/1min.wav"      preload="auto"></audio>
