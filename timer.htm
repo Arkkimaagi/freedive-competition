@@ -129,11 +129,11 @@
 						if ( countdown <= states[state]['trigger'] )
 						{
 							if ( states[state]['audio'] != null )
-
+              {
 								// Get preloaded audio source and use the security approved element to play it.
 								audio.src = get(states[state]['audio']).src;
 								audio.play();
-
+              }
 							states[state]['func']();
 							state++;
 						}
